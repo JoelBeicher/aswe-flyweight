@@ -31,7 +31,7 @@ export default defineComponent({
         return new Promise( ( resolve, reject ) => {
           let img = new Image();
           img.crossOrigin = 'Anonymous';
-          img.src = new URL(url, import.meta.env.BASE_URL).href;
+          img.src = new URL(url, import.meta.url).href;
           img.onload = ( () => {
             resolve( img );
           } );
