@@ -31,7 +31,7 @@ export default defineComponent({
         return new Promise( ( resolve, reject ) => {
           let img = new Image();
           img.crossOrigin = 'Anonymous';
-          img.src = new URL(url, import.meta.url).href;
+          img.src = new URL(url, import.meta.env.BASE_URL).href;
           img.onload = ( () => {
             resolve( img );
           } );
@@ -43,7 +43,10 @@ export default defineComponent({
       getFileName( url: string ) {
         const match = url.match( '\([a-zA-Z0-9\\s_\\\\.\\-\\(\\):])\+(.png|.jpeg|.pdf)$' );
         const ext = match?.[ match[ 'length' ] - 1 ].toString();
-        return match?.[ 0 ].replace( ext, '' );
+        if (ext) {
+          return match?.[ 0 ].replace( ext, '' );
+        }
+        return;
       },
     },
 
@@ -59,7 +62,7 @@ export default defineComponent({
         ];
         this.images = await this.loadImages( urls );
 
-      } catch ( err ) {
+      } catch ( err: any ) {
         console.error( `Not loading assets!\n ${ err.src }` );
       }
 
