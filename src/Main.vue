@@ -21,7 +21,6 @@ export default defineComponent({
       async loadImages( urls: string[] ) {
         const images = {} as any;
         for ( const url of urls ) {
-          console.log( this.getFileName( url ) );
           images[ `${ this.getFileName( url ) }` ] = await this.loadImage( url );
         }
         return images;
@@ -31,6 +30,9 @@ export default defineComponent({
         return new Promise( ( resolve, reject ) => {
           let img = new Image();
           img.crossOrigin = 'Anonymous';
+          console.log(url);
+          console.log(import.meta.url);
+          console.log(new URL(url, import.meta.url).href);
           img.src = new URL(url, import.meta.url).href;
           img.onload = ( () => {
             resolve( img );

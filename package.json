@@ -5,7 +5,7 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "build-deploy": "vue-tsc --noEmit && vite build && git subtree push --prefix dist origin gh-pages"
+    "build-deploy": "rm -rf dist && vue-tsc --noEmit && vite build && git add dist -f && git commit -m 'adding dist' && git subtree push --prefix dist origin gh-pages"
   },
   "dependencies": {
     "vue": "^3.2.25"
