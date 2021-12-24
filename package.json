@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build-deploy": "vue-tsc --noEmit && vite build && git subtree push --prefix dist origin gh-pages"
   },
   "dependencies": {
     "vue": "^3.2.25"
