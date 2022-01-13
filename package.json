@@ -2,13 +2,14 @@
   "name": "aswe-flyweight",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview",
-    "build-deploy": "rm -rf dist && vue-tsc --noEmit && vite build && git add dist -f && git commit -m 'adding dist' && git subtree push --prefix dist origin gh-pages"
+    "build": "vite build",
+    "build-deploy": "rm -rf dist && vue-tsc --noEmit && vite build && git add dist -f && git commit -m 'adding dist' && git subtree push --prefix dist origin gh-pages",
+    "dev": "vite"
   },
   "dependencies": {
-    "vue": "^3.2.25"
+    "buefy": "^0.9.14",
+    "vue": "^3.2.25",
+    "@types/node": "^17.0.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.0.0",
