@@ -1,28 +1,45 @@
 <template>
   <div id="app">
     <canvas id="game-scene" ref="gameScene" :width="1024" :height="600" />
-    <button class="start" @click="gameState.start()">
-      Start Adding Objects
-    </button>
-    <button class="start" @click="gameState.stop()">
-      Stop Animation
-    </button>
-    <b-field label="Simple">
-      <b-slider v-model="value"></b-slider>
-    </b-field>
-<!--    <input type="number" v-model="speed">-->
-<!--    <p>Input: {{ speed }}</p>-->
+    <div class="q-pa-md q-gutter-sm">
+      <q-btn class="start" push color="primary" @click="gameState.start()">
+        <q-icon left size="1em" name="fas fa-play" />
+        Start Animation
+      </q-btn>
+      <q-btn class="stop" push color="secondary" @click="gameState.stop()">
+        <q-icon left size="1em" name="fas fa-pause" />
+        Stop Animation
+      </q-btn>
+    </div>
 
-<!--    <input type="number" v-model="fps">-->
-<!--    <p>Input: {{ fps }}</p>-->
-<!--    <vue-slider v-model="y" />-->
+    <div class="q-pa-md">
+      <q-badge color="secondary">
+        Rotation: {{ force }}
+      </q-badge>
+
+      <q-slider
+        v-model="force"
+        :min="1"
+        :max="100"
+        :step="1"
+        label
+        :label-value="force + '°'"
+        label-always
+        color="primary"
+      />
+    </div>
+
+    <!--    <input type="number" v-model="speed">-->
+    <!--    <p>Input: {{ speed }}</p>-->
+
+    <!--    <input type="number" v-model="fps">-->
+    <!--    <p>Input: {{ fps }}</p>-->
+    <!--    <vue-slider v-model="y" />-->
   </div>
 </template>
 
 
 <script lang="ts">
-import BSlider from 'buefy';
-import BField from 'buefy';
 
 import Game from './flyweight-classes/Game';
 import MovingSceneObject from './flyweight-classes/MovingSceneObject';
@@ -35,10 +52,6 @@ import missile3Url from './assets/space_shooter/PNG/Sprites/Missile/Missile_3_Fl
 
 
 export default defineComponent( {
-  components: {
-    // BSlider,
-    // BField
-  },
   data() {
     return {
       canvas: {} as HTMLCanvasElement,
@@ -48,15 +61,16 @@ export default defineComponent( {
 
       speed: 0.00001,
       fps: 30,
-      value: 0,
-      y: 0
+      force: 1,
+
+      testMissile: {} as MovingSceneObject,
     };
   },
 
   watch: {
     speed( value, oldValue ) {
-      if ( !( value === oldValue ) && value !== "") {
-        this.gameState.changeObjectsProperties( 'speed', value );
+      if ( !( value === oldValue ) && value !== '' ) {
+        this.gameState.changeObjectsProperty( 'speed', value );
       }
     },
 
@@ -97,26 +111,48 @@ export default defineComponent( {
       }
       return;
     },
+
+    clickAction( event: MouseEvent ) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const { offsetX, offsetY } = event;
+      console.log( 'Target: ', offsetX, offsetY, this.force );
+      this.testMissile.target = new Vector( offsetX, offsetY );
+      this.testMissile.steeringForce = this.force;
+
+      this.gameState.changeObjectsProperty( 'target', new Vector( offsetX, offsetY ) );
+      this.gameState.changeObjectsProperty( 'steeringForce', this.force );
+    },
+
+    addEventListeners() {
+      this.canvas.addEventListener( 'mousedown', this.clickAction );
+    },
+
+    removeEventListeners() {
+      this.canvas.removeEventListener('mousedown', this.clickAction );
+    },
+
   },
-  
-  testFn() {
-    this.ctx.save();
-    const rad1 =  Math.atan( this.y / this.x );
-    this.ctx.translate( 300, 300 );
-    this.ctx.rotate( rad1 );
-    this.ctx.fillStyle = 'red';
-    this.ctx.strokeStyle = 'red';
 
-    this.ctx.fillRect( -150 * 0.5, -50 * 0.5, 150, 50 );
-    this.ctx.fillStyle = 'black';
-    this.ctx.fillRect(150 * 0.5 , -50 * 0.25, 20, 20)
-    this.ctx.restore();
+  computed: {
+    testFn() {
+      if ( !this.gameState.changeObjectsProperty ) {
+        return;
+      }
 
+      // this.gameState.changeObjectsProperties('direction', Vector.fromDegree(this.degrees))
+      // console.log("test....");
+      // @ts-ignore
+      return this.degrees;
+    },
   },
 
   async mounted() {
     this.canvas = this.$refs.gameScene as HTMLCanvasElement;
     this.ctx = this.canvas.getContext( '2d' ) as CanvasRenderingContext2D;
+
+    this.addEventListeners();
 
     try {
       const urls = [
@@ -144,21 +180,25 @@ export default defineComponent( {
 
     for ( const imgType in this.images ) {
       console.log( imgType );
-      for ( let i = 0; i < 100; i++ ) {
-        this.gameState.addObjectToScene(
-          new MovingSceneObject(
-            Vector.random(this.canvas.width),
-            Vector.random(),
-            imgType,
-            1,
-          ),
+      for ( let i = 0; i < 10; i++ ) {
+        this.testMissile = new MovingSceneObject(
+          Vector.random(this.canvas.width * 2),
+          Vector.random(),
+          imgType,
+          1,
         );
+
+        this.gameState.addObjectToScene( this.testMissile );
       }
     }
 
     // this.gameState.start()
 
   },
+
+  destroyed() {
+    this.removeEventListeners();
+  }
 } );
 // export default class Main {
 //   canvas = {} as HTMLCanvasElement;
@@ -236,16 +276,16 @@ export default defineComponent( {
 // }
 </script>
 
-<style>
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-}
-#game-scene {
-    border: 3px solid darkred;
-}
+<style lang="sass">
+#app
+    font-family: Avenir, Helvetica, Arial, sans-serif
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+    text-align: center
+    color: #2c3e50
+    margin-top: 60px
+
+
+#game-scene
+    border: 3px solid $primary
 </style>

@@ -10,6 +10,18 @@ export default class Vector {
     this.y = y;
   }
 
+  public static fromDegree( degrees: number ) {
+    // const angle = (degrees * Math.PI/180) % 360;
+    // const tangent = Math.tan( degrees * Math.PI / 180 );
+    // const section_x_positive = ( degrees < 90 || degrees > 270 ? 1 : -1 );
+    // const section_y_positive = ( degrees > 0 && degrees < 180 ? 1 : -1 );
+
+    return new Vector(
+      Math.cos( degrees * Math.PI / 180 ),
+      Math.sin( degrees * Math.PI / 180 ),
+    );
+  }
+
   public static random( max: number = 1 ) {
     let signX = 1;
     if ( Math.random() <= 0.5 ) {
