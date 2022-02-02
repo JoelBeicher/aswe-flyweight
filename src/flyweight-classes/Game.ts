@@ -9,28 +9,26 @@ export default class Game {
   private objects = [] as SceneObject[];
   private movingObjects = [] as MovingSceneObject[];
   private currentAnimation: number | undefined = 0;
-  private readonly images = {} as any;
+  protected readonly images = {} as any;
 
-  private canvas = {} as HTMLCanvasElement;
+  protected canvas = {} as HTMLCanvasElement;
   private ctx = {} as CanvasRenderingContext2D;
 
 
-  private fps: number;
+  private fps: number = 30;
   private animationId: NodeJS.Timer | undefined;
 
   constructor(
     canvas: HTMLCanvasElement,
     ctx: CanvasRenderingContext2D,
     availableImages: {},
-    sceneObjects: MovingSceneObject[] = [],
-    fps: number = 30,
+    movingSceneObjects: MovingSceneObject[] = [],
   ) {
     this.canvas = canvas;
     this.ctx = ctx;
     this.images = availableImages;
-    this.fps = fps;
 
-    for ( const obj of sceneObjects ) {
+    for ( const obj of movingSceneObjects ) {
       this.addObjectToScene( obj );
     }
   }
@@ -51,7 +49,7 @@ export default class Game {
     this.movingObjects.push( obj );
   }
 
-  public isObjectCached( objType: string ): boolean {
+  private isObjectCached( objType: string ): boolean {
     return !!this.getSceneObjectByType( objType );
   }
 
@@ -79,7 +77,7 @@ export default class Game {
     return this.images[ type ] as HTMLImageElement;
   }
 
-  private draw() {
+  public draw() {
     this.ctx.clearRect( 0, 0, this.canvas.width, this.canvas.height );
     for ( const movingObject of this.movingObjects ) {
       movingObject.draw(
@@ -91,16 +89,12 @@ export default class Game {
     }
   }
 
-  private animation( fnc: Function[] ) {
+  private animation() {
     if ( this.animationId ) {
       return;
     }
 
     this.animationId = setInterval( () => {
-      for ( const fn of fnc ) {
-        fn();
-      }
-
       this.doForAllMovingObjects(
         movingObj => {
           if ( movingObj.getType().startsWith( Missile.type ) ) {
@@ -122,7 +116,7 @@ export default class Game {
         }
       }, 1000 / this.fps );
 
-      this.animation( [] );
+      this.animation();
     };
 
     if ( !this.currentAnimation ) {
@@ -147,7 +141,6 @@ export default class Game {
   }
 
   public changeObjectsProperty( key: string, value: any ) {
-    console.log( key, value );
     this.doForAllMovingObjects( ( movObj, key: string, value ) => {
         // @ts-ignore
         if ( movObj.hasOwnProperty( key ) ) {
@@ -159,7 +152,6 @@ export default class Game {
       },
       key, value,
     );
-    console.log( this.movingObjects[ 0 ] );
   }
 
   public changeMovingObjectPropertyById( movObjId: string, key: string, value: any ) {

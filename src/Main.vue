@@ -1,33 +1,11 @@
 <template>
   <div id="app">
     <canvas id="game-scene" ref="gameScene" :width="1024" :height="600" />
-    <div class="q-pa-md q-gutter-sm">
-      <q-btn class="start" push color="primary" @click="gameState.start()">
-        <q-icon left size="1em" name="fas fa-play" />
-        Start Animation
-      </q-btn>
-      <q-btn class="stop" push color="secondary" @click="gameState.stop()">
-        <q-icon left size="1em" name="fas fa-pause" />
-        Stop Animation
-      </q-btn>
+    <div class="hide-wrapper">
+      <game-controls v-if="presentationAvailable" id="controls" canvas-id="game-scene" :presentation="presentation" />
     </div>
 
-    <div class="q-pa-md">
-      <q-badge color="secondary">
-        Rotation: {{ force }}
-      </q-badge>
-
-      <q-slider
-        v-model="force"
-        :min="1"
-        :max="100"
-        :step="1"
-        label
-        :label-value="force + '°'"
-        label-always
-        color="primary"
-      />
-    </div>
+    <game-actions canvas-id="game-scene" :game-state="gameState" />
 
     <!--    <input type="number" v-model="speed">-->
     <!--    <p>Input: {{ speed }}</p>-->
@@ -44,24 +22,51 @@
 import Game from './flyweight-classes/Game';
 import MovingSceneObject from './flyweight-classes/MovingSceneObject';
 import Vector from './helper/Vector';
+import GameControls from './game-components/PresentationControls.vue';
 
 import { defineComponent } from 'vue';
 import missile1Url from './assets/space_shooter/PNG/Sprites/Missile/Missile_1_Flying_000.png';
 import missile2Url from './assets/space_shooter/PNG/Sprites/Missile/Missile_2_Flying_000.png';
 import missile3Url from './assets/space_shooter/PNG/Sprites/Missile/Missile_3_Flying_000.png';
 
+import titleSlide from './assets/slides/Flyweight_1.png';
+import Agenda from './assets/slides/Flyweight_2.png';
+import Problem_1 from './assets/slides/Flyweight_3.png';
+import Problem_2 from './assets/slides/Flyweight_4.png';
+import Flyweight_1 from './assets/slides/Flyweight_5.png';
+import Flyweight_2 from './assets/slides/Flyweight_6.png';
+import Flyweight_3 from './assets/slides/Flyweight_7.png';
+import ProsCons_1 from './assets/slides/Flyweight_8.png';
+import ProsCons_2 from './assets/slides/Flyweight_9.png';
+import SingletonVsFlyweight_1 from './assets/slides/Flyweight_10.png';
+import SingletonVsFlyweight_2 from './assets/slides/Flyweight_11.png';
+import Sources from './assets/slides/Flyweight_12.png';
+
+import Presentation from './flyweight-classes/Presentation';
+import Slide from './flyweight-classes/Slide';
+import GameActions from './game-components/GameActions.vue';
+
 
 export default defineComponent( {
+
+  components: {
+    GameActions,
+    'GameControls': GameControls,
+  },
+
   data() {
     return {
       canvas: {} as HTMLCanvasElement,
       ctx: {} as CanvasRenderingContext2D,
-      images: {} as any,
-      gameState: {} as Game,
+
+      gameSprites: {} as any,
+      slideImages: {} as any,
+
+      gameState: {} as any,
+      presentation: {} as any,
 
       speed: 0.00001,
       fps: 30,
-      force: 1,
 
       testMissile: {} as MovingSceneObject,
     };
@@ -112,25 +117,22 @@ export default defineComponent( {
       return;
     },
 
-    clickAction( event: MouseEvent ) {
-      event.preventDefault();
-      event.stopPropagation();
+    onResize( event?: Event ) {
+      event?.preventDefault();
+      event?.stopPropagation();
 
-      const { offsetX, offsetY } = event;
-      console.log( 'Target: ', offsetX, offsetY, this.force );
-      this.testMissile.target = new Vector( offsetX, offsetY );
-      this.testMissile.steeringForce = this.force;
+      this.canvas.width = window.outerWidth;
+      this.canvas.height = window.innerHeight;
 
-      this.gameState.changeObjectsProperty( 'target', new Vector( offsetX, offsetY ) );
-      this.gameState.changeObjectsProperty( 'steeringForce', this.force );
+      // TODO: redraw scene
     },
 
     addEventListeners() {
-      this.canvas.addEventListener( 'mousedown', this.clickAction );
+      window.addEventListener( 'resize', this.onResize );
     },
 
     removeEventListeners() {
-      this.canvas.removeEventListener('mousedown', this.clickAction );
+      window.removeEventListener( 'resize', this.onResize );
     },
 
   },
@@ -146,146 +148,139 @@ export default defineComponent( {
       // @ts-ignore
       return this.degrees;
     },
+
+    presentationAvailable() {
+      // console.log( this.gameState instanceof Presentation );
+      return this.presentation instanceof Presentation;
+    },
   },
 
   async mounted() {
     this.canvas = this.$refs.gameScene as HTMLCanvasElement;
     this.ctx = this.canvas.getContext( '2d' ) as CanvasRenderingContext2D;
 
+    this.onResize();
     this.addEventListeners();
 
     try {
-      const urls = [
+      // const slideUrls = [
+      //   missile1Url,
+      //   missile2Url,
+      //   missile3Url,
+      // ];
+
+      const slideUrls = [
+        //presentation slides
+        titleSlide,
+        Agenda,
+        Problem_1,
+        Problem_2,
+        Flyweight_1,
+        Flyweight_2,
+        Flyweight_3,
+        ProsCons_1,
+        ProsCons_2,
+        SingletonVsFlyweight_1,
+        SingletonVsFlyweight_2,
+        Sources,
+
+      ];
+
+
+      const gameSpriteUrls = [
+        // game sprites
         missile1Url,
         missile2Url,
         missile3Url,
-        // './assets/space_shooter/PNG/Sprites/Missile/Missile_1_Flying_000.png',
-        // './assets/space_shooter/PNG/Sprites/Missile/Missile_2_Flying_000.png',
-        // './assets/space_shooter/PNG/Sprites/Missile/Missile_3_Flying_000.png',
       ];
-      this.images = await this.loadImages( urls );
+
+      // TODO: promise.all
+      this.slideImages = await this.loadImages( slideUrls );
+      this.gameSprites = await this.loadImages( gameSpriteUrls );
 
     } catch ( err: any ) {
       console.error( `Not loading assets!\n ${ err.src }` );
     }
 
-    console.log( this.images );
-    this.gameState = new Game( this.canvas, this.ctx, this.images );
 
-    const types = [
-      'Missile_1_Flying_000',
-      'Missile_2_Flying_000',
-      'Missile_3_Flying_000',
-    ];
+    let slides = [] as Slide[];
+    let count = 1;
 
-    for ( const imgType in this.images ) {
-      console.log( imgType );
-      for ( let i = 0; i < 10; i++ ) {
-        this.testMissile = new MovingSceneObject(
-          Vector.random(this.canvas.width * 2),
-          Vector.random(),
-          imgType,
-          1,
-        );
+    this.gameState = new Game( this.canvas, this.ctx, this.gameSprites );
 
-        this.gameState.addObjectToScene( this.testMissile );
-      }
+
+    for ( const img in this.gameSprites ) {
+      const missile = new MovingSceneObject(
+        Vector.random( this.canvas.width ),
+        Vector.random(),
+        img,
+        1,
+      );
+
+      this.gameState.addObjectToScene( missile as MovingSceneObject );
     }
 
+    const newSlide = new Slide( { gameState: this.gameState }, '2d', 4 );
+    slides.push( newSlide );
+
+    for ( const img of Object.keys( this.slideImages ) ) {
+      const currentSlideNumber = parseInt( img.slice( img.indexOf( '_' ) + 1 ) );
+
+      let actualSlideNumber = currentSlideNumber;
+      if ( currentSlideNumber > 3 ) {
+        actualSlideNumber += 1;
+      }
+
+      slides.push( new Slide( this.slideImages[ img ], 'image', actualSlideNumber ) );
+    }
+
+    this.presentation = new Presentation( this.canvas, this.ctx, slides );
+    this.presentation.sortSlides();
+    this.presentation.draw();
     // this.gameState.start()
 
   },
 
   destroyed() {
     this.removeEventListeners();
-  }
+  },
 } );
-// export default class Main {
-//   canvas = {} as HTMLCanvasElement;
-//   ctx = {} as CanvasRenderingContext2D;
-//   images = {} as any;
-//   gameState = {} as Game;
-//
-//   async loadImages( urls: string[] ) {
-//     const images = {} as any;
-//     for ( const url of urls ) {
-//       console.log( this.getFileName( url ) );
-//       images[ `${ this.getFileName( url ) }` ] = await this.loadImage( url );
-//     }
-//     return images;
-//   }
-//
-//   loadImage( url: string ) {
-//     return new Promise( ( resolve, reject ) => {
-//       let img = new Image();
-//       img.crossOrigin = 'Anonymous';
-//       img.src = require( `${ url }` );
-//       img.onload = ( () => {
-//         resolve( img );
-//       } );
-//       img.onerror = ( () => reject( img ) );
-//
-//     } );
-//   }
-//
-//   getFileName( url: string ) {
-//     const match = url.match( '\([a-zA-Z0-9\\s_\\\\.\\-\\(\\):])\+(.png|.jpeg|.pdf)$' );
-//     const ext = match?.[ match[ 'length' ] - 1 ].toString();
-//     return match?.[ 0 ].replace( ext, '' );
-//   }
-//
-//   async mounted() {
-//     console.log(this);
-//     this.canvas = this.$refs.gameScene as HTMLCanvasElement;
-//     this.ctx = this.canvas.getContext( '2d' ) as CanvasRenderingContext2D;
-//
-//     try {
-//       const urls = [
-//         './assets/space_shooter/PNG/Sprites/Missile/Missile_1_Flying_000.png',
-//         './assets/space_shooter/PNG/Sprites/Missile/Missile_2_Flying_000.png',
-//         './assets/space_shooter/PNG/Sprites/Missile/Missile_3_Flying_000.png',
-//       ];
-//       this.images = await this.loadImages( urls );
-//
-//     } catch ( err ) {
-//       console.error( `Not loading assets!\n ${ err.src }` );
-//     }
-//
-//     console.log( this.images );
-//     this.gameState = new Game( this.canvas, this.ctx, this.images );
-//
-//     const types = [
-//       'Missile_1_Flying_000',
-//       'Missile_2_Flying_000',
-//       'Missile_3_Flying_000',
-//     ];
-//
-//     for ( const type of types ) {
-//       this.gameState.addObjectToScene(
-//         new MovingSceneObject(
-//           Vector.random( this.canvas.width ),
-//           Vector.random( this.canvas.width ),
-//           type,
-//         ),
-//       );
-//     }
-//
-//     // this.gameState.start()
-//
-//   }
-// }
+
 </script>
 
 <style lang="sass">
+html, body
+  margin: 0
+  height: 100%
+  overflow: hidden
+
+
 #app
-    font-family: Avenir, Helvetica, Arial, sans-serif
-    -webkit-font-smoothing: antialiased
-    -moz-osx-font-smoothing: grayscale
-    text-align: center
-    color: #2c3e50
-    margin-top: 60px
+  font-family: Avenir, Helvetica, Arial, sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  text-align: center
+  color: #2c3e50
 
 
-#game-scene
-    border: 3px solid $primary
+//#game-scene
+//  border: 3px solid $primary
+
+#controls
+  padding-top: 1px
+  display: none
+
+#controls
+  background: transparentize(black, 0.8)
+
+.hide-wrapper
+  position: fixed
+  bottom: 0
+  width: 100%
+  height: 70px
+
+  &:hover #controls
+    display: block
+
+
 </style>
