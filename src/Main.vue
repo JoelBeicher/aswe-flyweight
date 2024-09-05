@@ -149,7 +149,7 @@ export default defineComponent( {
       return this.degrees;
     },
 
-    presentationAvailable() {
+    presentationAvailable(): boolean{
       // console.log( this.gameState instanceof Presentation );
       return this.presentation instanceof Presentation;
     },

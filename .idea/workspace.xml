@@ -1,7 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="84851689-3c08-465a-b376-67e68d84b1a2" name="Changes" comment="" />
+    <list default="true" id="84851689-3c08-465a-b376-67e68d84b1a2" name="Changes" comment="finally connected to github">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Flyweight_1.9f15955a.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Flyweight_10.54ba43ea.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Flyweight_11.674c525d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Flyweight_12.785e40f1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Flyweight_2.96a81aa2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Flyweight_3.34d1c80f.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Flyweight_4.43a5c7cd.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Flyweight_5.a3a85bc4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Flyweight_6.89b64d39.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Flyweight_7.05e88ae3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Flyweight_8.5ac323db.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Flyweight_9.af4f4f1f.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Missile_1_Flying_000.1296be13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Missile_2_Flying_000.b1f02716.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Missile_3_Flying_000.c9c39387.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/fa-brands-400.8ea87917.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/fa-brands-400.f9217f66.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/fa-regular-400.cb9e9e69.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/fa-regular-400.e42a8844.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/fa-solid-900.3f6d3488.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/fa-solid-900.9834b82a.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/flUhRq6tzZclQEJ-Vdg-IuiaDsNa.47b692f3.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.9baa4672.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/index.1b9482d6.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/index.28609fa9.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/vendor.aae08389.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,8 +43,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="JavaScript File" />
+        <option value="TypeScript File" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
   </component>
@@ -23,6 +57,12 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "JoelBeicher"
+  }
+}]]></component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
       <filtered-out-file-type name="LOCAL_BRANCH" />
@@ -31,9 +71,35 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/JoelBeicher/aswe-flyweight.git",
+    "accountId": "5833dfcb-f65d-4d2c-b416-7d90ffa49fe5"
+  }
+}]]></component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/package.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/components/Missile.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/flyweight-classes/SceneObject.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/flyweight-classes/Game.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/index.html" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/env.d.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Main.vue" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main.ts" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="ufod6lxs" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 3
+}]]></component>
   <component name="ProjectId" id="220XVsp1nxrqwQv0AdhiF8gV4r2" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -42,22 +108,58 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
-    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "npm.build-deploy.executor": "Run",
+    "npm.dev.executor": "Run",
+    "ts.external.directory.path": "/Users/joelbeicher/WebstormProjects/aswe-flyweight/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/assets" />
     </key>
+  </component>
+  <component name="RunManager" selected="npm.build-deploy">
+    <configuration name="build-deploy" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build-deploy" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="npm.dev" />
+      <item itemvalue="npm.build-deploy" />
+    </list>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-WS-242.21829.149" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -72,6 +174,16 @@
       <workItem from="1640208549257" duration="18461000" />
       <workItem from="1640306616769" duration="6000" />
       <workItem from="1640306775246" duration="24000" />
+      <workItem from="1640307381547" duration="116000" />
+      <workItem from="1640307501125" duration="101000" />
+      <workItem from="1640307605195" duration="29000" />
+      <workItem from="1640307635600" duration="49921000" />
+      <workItem from="1641816288323" duration="21644000" />
+      <workItem from="1643289692697" duration="817000" />
+      <workItem from="1643487044961" duration="31668000" />
+      <workItem from="1648562715385" duration="3260000" />
+      <workItem from="1648804198049" duration="980000" />
+      <workItem from="1725495306917" duration="1629000" />
     </task>
     <task id="LOCAL-00001" summary="finally connected to github">
       <created>1640302440664</created>
@@ -80,14 +192,92 @@
       <option name="project" value="LOCAL" />
       <updated>1640302440664</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="finally connected to github">
+      <created>1640307842735</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1640307842736</updated>
+    </task>
+    <task id="LOCAL-00003" summary="finally connected to github">
+      <created>1640309520197</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1640309520198</updated>
+    </task>
+    <task id="LOCAL-00004" summary="try stuff">
+      <created>1640310245606</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1640310245606</updated>
+    </task>
+    <task id="LOCAL-00005" summary="url works in dev">
+      <created>1640311621121</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1640311621121</updated>
+    </task>
+    <task id="LOCAL-00006" summary="logs to see whats going on in prod">
+      <created>1640313908280</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1640313908280</updated>
+    </task>
+    <task id="LOCAL-00007" summary="added moving rockets | started rotation adjustments">
+      <created>1642076105464</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1642076105464</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added uuid and click-follow event">
+      <created>1642174709864</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1642174709864</updated>
+    </task>
+    <task id="LOCAL-00009" summary="added presentation mode | currently handling image and 2d-context slides">
+      <created>1643815056398</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1643815056398</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/vite.config.js" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+      </list>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="finally connected to github" />
-    <option name="LAST_COMMIT_MESSAGE" value="finally connected to github" />
+    <MESSAGE value="try stuff" />
+    <MESSAGE value="url works in dev" />
+    <MESSAGE value="logs to see whats going on in prod" />
+    <MESSAGE value="added moving rockets | started rotation adjustments" />
+    <MESSAGE value="added uuid and click-follow event" />
+    <MESSAGE value="added presentation mode | currently handling image and 2d-context slides" />
+    <option name="LAST_COMMIT_MESSAGE" value="added presentation mode | currently handling image and 2d-context slides" />
   </component>
 </project>
